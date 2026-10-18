@@ -1,0 +1,19 @@
+{
+  "name": "Wortschatzkiste",
+  "short_name": "Wortschatz",
+  "description": "Deine Sammlung für schöne, schräge und seltene Wörter",
+  "lang": "de",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#fbf8f2",
+  "theme_color": "#fbf8f2",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

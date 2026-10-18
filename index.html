@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fbf8f2">
+  <meta name="description" content="Wortschatzkiste – deine Sammlung für besondere Wörter">
+  <title>Wortschatzkiste</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Wortschatzkiste</h1>
+    <button id="menuBtn" class="plain round" type="button" aria-label="Menü">⋯</button>
+  </header>
+
+  <main>
+    <div class="searchrow">
+      <input id="q" type="search" placeholder="Suchen" autocomplete="off" enterkeyhint="search" aria-label="Suchen">
+      <button id="filterBtn" class="plain textbtn" type="button" aria-expanded="false" aria-controls="filters">Filter<span id="filterCount"></span></button>
+    </div>
+
+    <div id="filters" class="filters" hidden>
+      <div id="chips" class="chips" role="group" aria-label="Kategorie"></div>
+      <div class="frow">
+        <select id="tagSel" aria-label="Nach Tag filtern"></select>
+        <select id="sortSel" aria-label="Sortierung">
+          <option value="az">A–Z</option>
+          <option value="new">Neueste zuerst</option>
+          <option value="old">Älteste zuerst</option>
+        </select>
+      </div>
+      <div class="frow">
+        <button id="favBtn" class="chip" type="button" aria-pressed="false">★ Nur Favoriten</button>
+        <button id="resetBtn" class="plain textbtn" type="button">Zurücksetzen</button>
+      </div>
+    </div>
+
+    <p id="count" class="count" aria-live="polite"></p>
+    <section id="list" class="list" aria-label="Wörter"></section>
+  </main>
+
+  <button id="fab" class="fab" type="button" aria-label="Neues Wort eintragen">+</button>
+
+  <!-- Eintragen / Bearbeiten -->
+  <dialog id="editor">
+    <form id="form" autocomplete="off">
+      <div class="sheet-head">
+        <h2 id="editorTitle">Neues Wort</h2>
+        <button id="cancelBtn" class="plain round" type="button" aria-label="Schließen">✕</button>
+      </div>
+
+      <input id="f-word" class="big" type="text" required placeholder="Wort" aria-label="Wort" spellcheck="false">
+      <input id="f-meaning" type="text" placeholder="Bedeutung (optional)" aria-label="Bedeutung">
+
+      <details id="more">
+        <summary>Mehr Optionen</summary>
+        <div class="more-body">
+          <div class="field">
+            <span class="label">Kategorie</span>
+            <div id="f-cats" class="chips" role="group" aria-label="Kategorie"></div>
+          </div>
+          <label class="field">Andere Formen
+            <input id="f-forms" type="text" placeholder="z. B. auserkiest (Nebenform)">
+          </label>
+          <label class="field">Beispielsatz
+            <textarea id="f-example" rows="2"></textarea>
+          </label>
+          <label class="field">Tags
+            <input id="f-tags" type="text" placeholder="mit Komma trennen">
+          </label>
+          <label class="field">Notiz
+            <textarea id="f-note" rows="2" placeholder="z. B. wo du es gefunden hast"></textarea>
+          </label>
+        </div>
+      </details>
+
+      <button type="submit" class="primary wide">Speichern</button>
+    </form>
+  </dialog>
+
+  <!-- Wort ansehen -->
+  <dialog id="detail">
+    <div class="sheet">
+      <div class="sheet-head">
+        <span></span>
+        <button id="closeDetail" class="plain round" type="button" aria-label="Schließen">✕</button>
+      </div>
+      <div id="detailBody"></div>
+    </div>
+  </dialog>
+
+  <!-- Menü -->
+  <dialog id="menuDlg">
+    <div class="sheet">
+      <div class="sheet-head">
+        <h2>Menü</h2>
+        <button id="closeMenu" class="plain round" type="button" aria-label="Schließen">✕</button>
+      </div>
+      <div class="menu">
+        <button id="randomBtn" type="button">Zufälliges Wort</button>
+        <button id="themeBtn" type="button">Dunkelmodus</button>
+        <button id="exportBtn" type="button">Sicherung herunterladen</button>
+        <label class="menu-item">Sicherung laden
+          <input id="importFile" type="file" accept="application/json,.json" hidden>
+        </label>
+        <button id="wipeBtn" class="danger-text" type="button">Alles löschen</button>
+      </div>
+      <p class="hint">Deine Wörter liegen nur in diesem Browser. Mach ab und zu eine Sicherung.</p>
+    </div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
